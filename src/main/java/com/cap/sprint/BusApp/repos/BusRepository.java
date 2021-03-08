@@ -12,6 +12,6 @@ public interface BusRepository extends JpaRepository<Bus,Integer>{
 
 	Bus findByBusNumber(String busNumber);
 
-	Optional<Bus> findByBusOperatorBusOperatorUsername(String busOperatorUsername);
+	Bus findByBusOperatorBusOperatorUsername(String busOperatorUsername);
 
 }

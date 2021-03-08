@@ -33,15 +33,14 @@ public class BookingService {
 	
 	@Autowired
 	UserRepository userRepository;
-
-	Feedback newFeedback;
 	
 	//addBooking(Booking):long
 	public long addBooking(Booking booking) {
 		Booking b1 = bookingRepository.findByUsername(booking.getUsername());
 		if(b1 == null) {
 			bookingRepository.save(booking);
-		} else {
+		} 
+		else {
 			throw new UserAlreadyExistException("User already exist");
 		}
 		return booking.getBookingId();
@@ -136,6 +135,7 @@ public class BookingService {
 	public void addFeedback(User user,long bookingId) {
 		Optional<Booking> booking = bookingRepository.findByBookingId(bookingId);
 		Booking b = null;
+		Feedback f = new Feedback();
 		if(booking.isPresent()) {
 			b = booking.get();
 		} else {
@@ -150,16 +150,17 @@ public class BookingService {
 			throw new UserNotFoundException("User not found!!!");
 		}
 		
-		newFeedback.setRouteName(b.getBusRoute().getRouteName());
-		newFeedback.setUsername(u.getUsername());
-		newFeedback.setUser(u);
-		feedbackRepository.save(newFeedback);
+		
+		f.setRouteName(b.getBusRoute().getRouteName());
+		f.setUsername(u.getUsername());
+		f.setUser(u);
+		feedbackRepository.save(f);
  	}
 	
 	//addFeedback(String,long,String):void
 	public void addFeedback(String username, long bookingid, String comment) {
 	Optional<Booking> booking = bookingRepository.findByBookingId(bookingid);
-	Feedback feedback = new Feedback(); 
+	Feedback feedback = new Feedback();
 	Booking b = null;
 	if(booking.isPresent()) {
 		b = booking.get();
@@ -176,7 +177,6 @@ public class BookingService {
 	feedback.setUsername(username);
 	feedback.setUser(u);
 	feedbackRepository.save(feedback);
-
 	}
 	
 	

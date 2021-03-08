@@ -21,17 +21,21 @@ public class Feedback {
 	@ManyToOne(cascade = CascadeType.ALL)
 	User user;
 	
+	@ManyToOne(cascade = CascadeType.ALL)
+	BusOperator busOperator;
+	
 	public Feedback() {
 		super();
 	}
 
-	public Feedback(int rating, String comment, String username, String routeName,User user) {
+	public Feedback(int rating, String comment, String username, String routeName,User user,BusOperator busOperator) {
 		super();
 		this.rating = rating;
 		this.comment = comment;
 		this.username = username;
 		this.routeName = routeName;
 		this.user = user;
+		this.busOperator=busOperator;
 	}
 
 	public int getId() {
@@ -80,6 +84,14 @@ public class Feedback {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public BusOperator getBusOperator() {
+		return busOperator;
+	}
+
+	public void setBusOperator(BusOperator busOperator) {
+		this.busOperator = busOperator;
 	}
 
 	@Override

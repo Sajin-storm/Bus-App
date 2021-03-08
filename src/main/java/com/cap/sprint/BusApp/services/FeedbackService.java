@@ -45,9 +45,12 @@ public class FeedbackService {
 	}
 	
 	public List<Feedback> viewAllFeedbacks(BusOperator busOperator){
-		
-		return null;
+		List<Feedback> feedback = feedbackRepository.findByBusOperatorBusOperatorUsername(busOperator.getBusOperatorusername());
+		return feedback;
 	}
+	
+	
+	
 	
 	
 	public List<Feedback> getAllFeedbacks(){

@@ -23,7 +23,7 @@ public class BusOperator {
 	@OneToOne
 	Feedback feedback; 
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	Bus bus;
 	
 	public BusOperator() {

@@ -1,5 +1,7 @@
 package com.cap.sprint.BusApp.entities;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,13 +9,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 public class Bus {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	int id;
 	String busNumber;
 	int totalSeats;
@@ -28,6 +35,9 @@ public class Bus {
 	@ManyToOne
 	@JoinColumn(name = "bus_Route")
 	BusRoute busRoute;
+	
+	@OneToMany(cascade = CascadeType.REMOVE,orphanRemoval = true)
+	List<Booking> booking;
 	
 	public Bus() {
 		super();

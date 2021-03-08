@@ -5,8 +5,11 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 
 import com.cap.sprint.BusApp.entities.Booking;
 import com.cap.sprint.BusApp.entities.Bus;
@@ -76,9 +79,13 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Override
 	public void deleteBus(Bus bus) {
-		Optional<Bus> b = busRepository.findById(bus.getId());
-		if(b.isPresent()) {
-			busRepository.delete(bus);
+		Bus b = busRepository.findByBusNumber(bus.getBusNumber());
+		if(b !=null ) {
+			Booking booking = bookingRepository.findByBusBusNumber(b.getBusNumber());
+			bookingRepository.delete(booking);
+			//busOperatorRepository.delete(null);
+			//busOperatorRequestRepository.delete(null);
+			busRepository.deleteById(b.getId());
 		} else {
 			throw new BusDoesnotExistException("Bus does not exist!!!");
 		}
@@ -86,11 +93,9 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Override
 	public void deleteBusByOperator(String busOperatorUsername) {
-		Optional<Bus> b = busRepository.findByBusOperatorBusOperatorUsername(busOperatorUsername);
-		Bus bus = null;
-		if(b.isPresent()) {
-			bus =b.get();
-			busRepository.delete(bus);
+		Bus b = busRepository.findByBusOperatorBusOperatorUsername(busOperatorUsername);
+		if(b != null) {
+			busRepository.delete(b);
 		} else {
 			throw new BusDoesnotExistException("BusOperator does not exist!!!");
 		}
