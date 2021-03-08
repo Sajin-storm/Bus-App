@@ -25,12 +25,12 @@ class TestUserService {
 
 	@Test
 	void testDeleteUser() {
-		fail("Not yet implemented");
+		userService.deleteUser("Ravi");
 	}
 
 	@Test
 	void testUpdateUser() {
-		fail("Not yet implemented");
+		userService.updateUser("Ravi","Ravi567");
 	}
 
 	@Test
