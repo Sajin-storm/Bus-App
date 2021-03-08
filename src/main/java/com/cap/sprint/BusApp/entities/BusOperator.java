@@ -51,11 +51,11 @@ public class BusOperator {
 		this.id = id;
 	}
 
-	public String getBusOperatorusername() {
+	public String getBusOperatorUsername() {
 		return busOperatorUsername;
 	}
 
-	public void setBusOperatorusername(String busOperatorUsername) {
+	public void setBusOperatorUsername(String busOperatorUsername) {
 		this.busOperatorUsername = busOperatorUsername;
 	}
 

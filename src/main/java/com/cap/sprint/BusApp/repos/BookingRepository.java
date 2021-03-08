@@ -23,5 +23,7 @@ public interface BookingRepository extends JpaRepository<Booking,Integer>{
 	public List<Booking> findByBusRouteRouteName(String routeName);
 	public Booking findByBusBusNumber(String busNumber);
 	public List<Booking> findByBusBusOperatorBusOperatorUsername(String busOperatorUsername);
+	
+	public List<Booking> findByBusRouteRouteNameAndDate(String routeName, LocalDate date);
 
 }

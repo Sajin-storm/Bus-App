@@ -11,6 +11,7 @@ import com.cap.sprint.BusApp.entities.Booking;
 import com.cap.sprint.BusApp.entities.BusRoute;
 import com.cap.sprint.BusApp.entities.Feedback;
 import com.cap.sprint.BusApp.entities.User;
+import com.cap.sprint.BusApp.exception.BookingAlreadyExistException;
 import com.cap.sprint.BusApp.exception.BookingNotFoundException;
 import com.cap.sprint.BusApp.exception.UserAlreadyExistException;
 import com.cap.sprint.BusApp.exception.UserNotFoundException;
@@ -41,7 +42,7 @@ public class BookingService {
 			bookingRepository.save(booking);
 		} 
 		else {
-			throw new UserAlreadyExistException("User already exist");
+			throw new BookingAlreadyExistException("User already exist");
 		}
 		return booking.getBookingId();
 	}
